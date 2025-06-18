@@ -1,4 +1,5 @@
 import datetime
+from gtp_auto.config.time import is_trade_window_now
 
 def get_kst_time():
     return datetime.datetime.utcnow() + datetime.timedelta(hours=9)
@@ -22,14 +23,19 @@ def is_trade_time():
     return False
 
 def main():
-    print("   ")
+    print("")
     now = get_kst_time()
-    print(f"  KST : {now.strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"KST : {now.strftime('%Y-%m-%d %H:%M:%S')}")
+
+    if not is_trade_window_now():
+        print("[GTP]     .")
+        return
 
     if is_trade_time():
-        print("   .    ...")
+        print("   ")
     else:
-        print("    .  ...")
+        print("   ")
 
 if __name__ == "__main__":
     main()
+
